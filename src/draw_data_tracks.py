@@ -41,7 +41,7 @@ def scatter3D_x_y_t(N):
 def plot_v_t(N):
     """
     各个id数据的速度与时间的二维关系
-    机器轨迹: 绿色
+    机器轨迹: 灰色
     人类轨迹: 红色
     """
     for id in xrange(N):
@@ -62,13 +62,16 @@ def plot_v_t(N):
             y2 = float(next_track_list[1])
             t2 = float(next_track_list[2])
 
+            di = 1  # 方向
+            if x2 < x1: di = -1
+            elif x2 == x1 and y2 < y1: di = -1
             distance = math.sqrt(math.pow((x2-x1), 2) + math.pow((y2-y1), 2))
             _dt = t2 - t1
             if _dt == 0:  # 奇怪...有时间点相等的数据(比如2596)
                 continue
-            _v = float(distance / _dt)
+            _v = float((distance / _dt) * di)
             
-            v.append(_v); t.append(t1)
+            v.append(_v); t.append(t1+(t2-t1)/2)
         if label == '0':
             ax.plot(t, v, 'C7')
             ax_c.plot(t, v, 'C7')

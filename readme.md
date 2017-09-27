@@ -8,13 +8,13 @@ https://bdc.saikr.com/vse/bdc/2017
 
 ### 每个id数据经过的轨迹点分布
 
-+ 所有数据
+#### 所有数据
 ![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track.png)
 
-+ 正常轨迹数据
+#### 正常轨迹数据
 ![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_h.png)
 
-+ 机器轨迹数据
+#### 机器轨迹数据
 ![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_c.png)
 
 **结论**:
@@ -23,3 +23,10 @@ https://bdc.saikr.com/vse/bdc/2017
     所以看看能不能从速度的变化进行区分.
 
 ### 每个id数据在相邻时间间隔内的平均速度与时间的关系
+
+![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/v_t.png)
+
++ 第一幅图是所有数据
++ 红色是正常数据, 灰色是机器数据
+
+**结论**
