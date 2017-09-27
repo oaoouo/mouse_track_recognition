@@ -9,13 +9,13 @@ https://bdc.saikr.com/vse/bdc/2017
 ### 每个id数据经过的轨迹点分布
 
 + 所有数据
-[](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track.png)
+![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track.png)
 
 + 正常轨迹数据
-[](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_h.png)
+![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_h.png)
 
 + 机器轨迹数据
-[](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_c.png)
+![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/track_c.png)
 
 **结论**:
 
