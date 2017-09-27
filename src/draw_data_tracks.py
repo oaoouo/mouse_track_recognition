@@ -5,6 +5,10 @@
     ```````````````````
 
     根据数据库中的测试数据绘制轨迹
+
+    + 使用matplotlib绘图
+        - 官方: https://matplotlib.org/
+        - 快速上手: https://zhuanlan.zhihu.com/p/28993962
 """
 
 import sys
@@ -30,18 +34,18 @@ def scatter3D_x_y_t(N):
             x.append(float(track.split(',')[0]))
             y.append(float(track.split(',')[1]))
             t.append(float(track.split(',')[2]))
-        ax.scatter3D(x, y, t)
-    fig1.savefig('./imgs/track.png')
+        ax.scatter3D(t, x, y)
+    fig1.savefig('track.png')
 
 
-def plot_v_dt(N):
+def plot_v_t(N):
     """
-    各个id数据的速度与dt的二维关系
+    各个id数据的速度与时间的二维关系
     机器轨迹: 绿色
     人类轨迹: 红色
     """
     for id in xrange(N):
-        v = dt = []
+        v = t = []
         tracks = eval(db.hget(id+1, 'tracks'))
         label = db.hget(id+1, 'label')
         for pos in range(len(tracks)-1):
@@ -60,18 +64,18 @@ def plot_v_dt(N):
 
             distance = math.sqrt(math.pow((x2-x1), 2) + math.pow((y2-y1), 2))
             _dt = t2 - t1
-            if _dt == 0:  # 有时间点相等的数据(比如2596)
+            if _dt == 0:  # 奇怪...有时间点相等的数据(比如2596)
                 continue
             _v = float(distance / _dt)
             
-            v.append(_v); dt.append(_dt)
+            v.append(_v); t.append(t1)
+        if label == '0':
+            ax.plot(t, v, 'C7')
+            ax_c.plot(t, v, 'C7')
         if label == '1':
-            ax.plot(dt, v, 'C3')
-            ax_m.plot(dt, v, 'C3')
-        else:
-            ax.plot(dt, v, 'C7')
-            ax_c.plot(dt, v, 'C7')
-    fig2.savefig('./imgs/v_dt.png')
+            ax.plot(t, v, 'C3')
+            ax_m.plot(t, v, 'C3')
+    fig2.savefig('v_t.png')
 
 
 if __name__ == '__main__':
@@ -80,6 +84,10 @@ if __name__ == '__main__':
     if sys.argv[1] == 'track':
         fig1 = plt.figure()
         ax = plt.axes(projection='3d')
+        ax.set_title('the track point distribution')
+        ax.set_xlabel('time')
+        ax.set_ylabel('x-coordinate')
+        ax.set_zlabel('y-coordinate')
         scatter3D_x_y_t(3000)
 
     if sys.argv[1] == 'speed':
@@ -88,4 +96,4 @@ if __name__ == '__main__':
         ax_m = axes.ravel()[2]  # 子图(人类)
         ax_c = axes.ravel()[3]  # 子图(电脑)
         axes.ravel()[1].axis('off') # 隐藏子图1
-        plot_v_dt(3000)
+        plot_v_t(3000)
