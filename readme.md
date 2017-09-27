@@ -30,3 +30,9 @@ https://bdc.saikr.com/vse/bdc/2017
 + 红色是正常数据, 灰色是机器数据
 
 **结论**
+<img src="https://user-images.githubusercontent.com/31455293/30903351-0f16940e-a3a1-11e7-9876-d558949a1eac.jpg" width = "300" height = "300" alt="" align=center />
+
+或许是我图画错了.... <br>
+比较奇怪的是, 训练数据中存在时间相同但是轨迹(x, y)不同的点, 比如: id=2596
+
+    290,2737,247;304,2737,247
