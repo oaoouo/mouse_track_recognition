@@ -81,6 +81,49 @@ def plot_v_t(N):
     fig2.savefig('v_t.png')
 
 
+def speed_per_id(N):
+    """
+    计算出每个id点的平均速度,做一个分类, 看是否能找出明显的分界线;
+    (平均速度, 平均加速度), 看能不能找到分界线
+    """
+    for id in xrange(N):
+        v = []  # 用于存放每段的平均速度, 用于计算该id数据的最终平均速度
+        t = []  # 存放每段时间间隔
+        tracks = eval(db.hget(id+1, 'tracks'))  # 每个id的轨迹列表
+        label = db.hget(id+1, 'label')  # 每个id的标签(用不同的颜色区分)
+        for pos in range(len(tracks)-1):
+            # 计算相邻两点的平均速度, 进而计算该id的整体平均速度, 用于代表该id
+            track = tracks[pos]
+            next_track = tracks[pos+1]
+            track_list = track.split(',')
+            next_track_list = next_track.split(',')
+            # 计算坐标
+            x1 = float(track_list[0])
+            y1 = float(track_list[1])
+            t1 = float(track_list[2])
+            x2 = float(next_track_list[0])
+            y2 = float(next_track_list[1])
+            t2 = float(next_track_list[2])
+            # 计算两点间的平均速度
+            distance = math.sqrt(math.pow((x2-x1), 2) + math.pow((y2-y1), 2))
+            time = t2-t1
+            if time == 0: # traning set中有时间间隔为0的数据, 先跳过
+                continue
+            v.append(distance / time)
+            t.append(time)
+        if v == []: # why ?
+            continue
+        vp = sum(v) / len(v)
+        a = [speed / time for speed, time in zip(v, t)]
+        ap = sum(a) / len(a)
+
+        if label == '0':
+            ax.scatter(vp, ap, c='green')
+        if label == '1':
+            ax.scatter(vp, ap, c='red')
+    fig3.savefig('v_a.png')
+
+
 if __name__ == '__main__':
     db = redis.StrictRedis(host='localhost', port=6379)
 
@@ -100,3 +143,11 @@ if __name__ == '__main__':
         ax_c = axes.ravel()[3]  # 子图(电脑)
         axes.ravel()[1].axis('off') # 隐藏子图1
         plot_v_t(3000)
+
+    if sys.argv[1] == 'scatter':
+        fig3 = plt.figure()
+        ax = plt.axes()
+        ax.set_title('v-a distribution')
+        ax.set_xlabel('speed')
+        ax.set_ylabel('acceleration')
+        speed_per_id(3000)

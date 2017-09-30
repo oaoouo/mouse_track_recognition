@@ -82,5 +82,5 @@ def store_data_in_redis(data_list):
 
 if __name__ == '__main__':
     db = redis.StrictRedis(host='127.0.0.1', port=6379)  # redis数据库连接句柄
-    data_list = read_traning_file('./ml/dsjtzs_txfz_traning.txt')
+    data_list = read_traning_file('../ml/dsjtzs_txfz_traning.txt')
     store_data_in_redis(data_list)

@@ -36,3 +36,9 @@ https://bdc.saikr.com/vse/bdc/2017
 比较奇怪的是, 训练数据中存在时间相同但是轨迹(x, y)不同的点, 比如: id=2596
 
     290,2737,247;304,2737,247
+
+### 每个id速度和加速度的二维分布: 有效果了!
+
+![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/v_a.png)
+
++ 红色是人类轨迹; 绿色是机器轨迹;
