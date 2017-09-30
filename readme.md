@@ -42,3 +42,9 @@ https://bdc.saikr.com/vse/bdc/2017
 ![](https://raw.githubusercontent.com/oaoouo/mouse_track_recognition/master/imgs/v_a.png)
 
 + 红色是人类轨迹; 绿色是机器轨迹;
+
+**结论**
+
+    速度人类和机器基本在一个区间(个别机器轨迹更快一点);
+    但是加速度区别就很大了, 人类对速度的把控没有机器强, 机器基本是匀速的,
+    而人类加速度区间的范围就很大了.
